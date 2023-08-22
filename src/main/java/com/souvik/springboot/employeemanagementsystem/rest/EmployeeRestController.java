@@ -1,11 +1,8 @@
 package com.souvik.springboot.employeemanagementsystem.rest;
 
-import com.souvik.springboot.employeemanagementsystem.dao.EmployeeDAO;
 import com.souvik.springboot.employeemanagementsystem.entity.Employee;
 import com.souvik.springboot.employeemanagementsystem.service.EmployeeService;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +26,7 @@ public class EmployeeRestController {
     @GetMapping("/employees/{employee_id}")
     public Employee getEmployee(@PathVariable Long employee_id) {
 
-        Employee employee =  employeeService.find(employee_id);
+        Employee employee =  employeeService.findById(employee_id);
 
         if(employee == null) {
             throw new RuntimeException("Employee id not found - " + employee_id);
@@ -50,7 +47,7 @@ public class EmployeeRestController {
 
     @DeleteMapping("/employees/{employee_id}")
     public String deleteEmployee(@PathVariable Long employee_id) {
-        Employee employee = employeeService.find(employee_id);
+        Employee employee = employeeService.findById(employee_id);
 
         if(employee == null) {
             throw new RuntimeException("Employee id not found - " + employee_id);
